@@ -34,13 +34,12 @@ EOF
         chmod 0755 "#{staged_path}/mister-companion-unstable-nightly-wrapper"
 
         # Native .app with icon
-        APP="#{staged_path}/MiSTer Companion Unstable Nightly.app"
-        mkdir -p "$APP/Contents/MacOS"
-        mkdir -p "$APP/Contents/Resources"
+        mkdir -p "#{staged_path}/MiSTer Companion Unstable Nightly.app/Contents/MacOS"
+        mkdir -p "#{staged_path}/MiSTer Companion Unstable Nightly.app/Contents/Resources"
 
-        cp "#{staged_path}/mister-companion/app.ico" "$APP/Contents/Resources/app.icns"
+        cp "#{staged_path}/mister-companion/app.ico" "#{staged_path}/MiSTer Companion Unstable Nightly.app/Contents/Resources/app.icns"
 
-        cat > "$APP/Contents/Info.plist" << 'PLIST'
+        cat > "#{staged_path}/MiSTer Companion Unstable Nightly.app/Contents/Info.plist" << 'EOF'
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
@@ -56,14 +55,14 @@ EOF
       <key>CFBundleIconFile</key><string>app.icns</string>
     </dict>
     </plist>
-    PLIST
+EOF
 
-        cat > "$APP/Contents/MacOS/mister-companion-unstable-nightly" << 'LAUNCHER'
+        cat > "#{staged_path}/MiSTer Companion Unstable Nightly.app/Contents/MacOS/mister-companion-unstable-nightly" << 'EOF'
 #!/bin/bash
 cd "#{staged_path}"
 exec "#{staged_path}/venv/bin/python" "#{staged_path}/mister-companion/main.py" "$@"
-LAUNCHER
-        chmod 0755 "$APP/Contents/MacOS/mister-companion-unstable-nightly"
+EOF
+        chmod 0755 "#{staged_path}/MiSTer Companion Unstable Nightly.app/Contents/MacOS/mister-companion-unstable-nightly"
       EOS
     ],
     print_stderr: true
