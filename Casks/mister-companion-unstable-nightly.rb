@@ -17,7 +17,7 @@ cask "mister-companion-unstable-nightly" do
     executable: "/usr/bin/env",
     args: [
       "bash", "-c",
-      <<~EOS,
+      <<~EOS
         set -e
         cd "#{staged_path}"
 
