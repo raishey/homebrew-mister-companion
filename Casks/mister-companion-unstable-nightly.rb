@@ -28,9 +28,9 @@ cask "mister-companion-unstable-nightly" do
 
         # CLI wrapper
         cat > "#{staged_path}/mister-companion-unstable-nightly-wrapper" << 'EOF'
-      #!/bin/bash
-      exec "#{staged_path}/venv/bin/python" "#{staged_path}/mister-companion/main.py" "$@"
-      EOF
+#!/bin/bash
+exec "#{staged_path}/venv/bin/python" "#{staged_path}/mister-companion/main.py" "$@"
+EOF
         chmod 0755 "#{staged_path}/mister-companion-unstable-nightly-wrapper"
 
         # Native .app with icon
@@ -40,7 +40,7 @@ cask "mister-companion-unstable-nightly" do
 
         cp "#{staged_path}/mister-companion/app.ico" "$APP/Contents/Resources/app.icns"
 
-        cat > "$APP/Contents/Info.plist" << 'EOF'
+        cat > "$APP/Contents/Info.plist" << 'PLIST'
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
@@ -50,19 +50,19 @@ cask "mister-companion-unstable-nightly" do
       <key>CFBundleDisplayName</key><string>MiSTer Companion Unstable Nightly</string>
       <key>CFBundleExecutable</key><string>mister-companion-unstable-nightly</string>
       <key>CFBundlePackageType</key><string>APPL</string>
-      <key>CFBundleShortVersionString</key><string>#{version.to_s.sub(/^v/, "")}</string>
+      <key>CFBundleShortVersionString</key><string>#{version}</string>
       <key>LSMinimumSystemVersion</key><string>13.0</string>
       <key>NSHighResolutionCapable</key><true/>
       <key>CFBundleIconFile</key><string>app.icns</string>
     </dict>
     </plist>
-    EOF
+    PLIST
 
-        cat > "$APP/Contents/MacOS/mister-companion-unstable-nightly" << 'EOF'
+        cat > "$APP/Contents/MacOS/mister-companion-unstable-nightly" << 'LAUNCHER'
       #!/bin/bash
       cd "#{staged_path}"
       exec "#{staged_path}/venv/bin/python" "#{staged_path}/mister-companion/main.py" "$@"
-      EOF
+      LAUNCHER
         chmod 0755 "$APP/Contents/MacOS/mister-companion-unstable-nightly"
       EOS
     ],
