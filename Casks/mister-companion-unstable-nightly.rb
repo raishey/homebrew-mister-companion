@@ -59,10 +59,10 @@ EOF
     PLIST
 
         cat > "$APP/Contents/MacOS/mister-companion-unstable-nightly" << 'LAUNCHER'
-      #!/bin/bash
-      cd "#{staged_path}"
-      exec "#{staged_path}/venv/bin/python" "#{staged_path}/mister-companion/main.py" "$@"
-      LAUNCHER
+#!/bin/bash
+cd "#{staged_path}"
+exec "#{staged_path}/venv/bin/python" "#{staged_path}/mister-companion/main.py" "$@"
+LAUNCHER
         chmod 0755 "$APP/Contents/MacOS/mister-companion-unstable-nightly"
       EOS
     ],
